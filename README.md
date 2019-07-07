@@ -19,11 +19,20 @@
 ## 模块认知
 ### Mpu6050模块
 陀螺仪。  
-待补充，后续补成链接。
+
+[知乎](https://zhuanlan.zhihu.com/p/20082486)上也有一篇关于MPU6050的讲解，代码缺少卡尔曼滤波，运行不起来，但原理部分基本讲清楚了。
+
+[野火](http://www.luwl.net/wp-content/uploads/2017/03/MPU6050%E6%95%99%E7%A8%8B.pdf)上关于此模块的讲解。
+
+[英文版手册下载地址](http://pdf1.alldatasheetcn.com/datasheet-pdf/view/517744/ETC1/MPU-6050.html)。
+
+[中文版手册下载地址](https://wenku.baidu.com/view/a0c0f751a31614791711cc7931b765ce04087a13.html)。
 
 ### HC-06
 蓝牙。  
-待补充。
+HC-06是目前用的较多的蓝牙模块，HC-06只能作为从机工作，因此对于被控制的小车来说非常适合使用。
+
+[这里](https://www.jianshu.com/p/5c220d0d3692)有非常清晰的接线图，其实不需要上位机测试，但更改名称或PIN需要用上位机进入AT进行更改。下载一个串口通信助手，打开后连接蓝牙（默认名称为HC-06），成功后即可发送数据，进行通信。
 
 ### SSD 1306
 OLED显示模块。
