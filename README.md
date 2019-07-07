@@ -17,6 +17,7 @@
 4. 成果展示
 
 ## 模块认知
+测试笔记在[这里](https://github.com/JadenNeal/Balance-Car/tree/master/TEST_NOTES)，记录了模块的测试记录，使用方法，接线图等。
 ### Mpu6050模块
 陀螺仪。  
 
