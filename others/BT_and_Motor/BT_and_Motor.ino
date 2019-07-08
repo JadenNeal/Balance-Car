@@ -1,3 +1,6 @@
+#include <SoftwareSerial.h>
+//使用软件串口，能将数字口模拟成串口
+SoftwareSerial BT(2, 3);  //新建对象，板子的接收脚为2，发送脚为3
 char val;  //存储接收的变量
 
 int STBY = 11; //使能端
@@ -16,6 +19,8 @@ void runset(int motor, int speed, int direction);  //转动控制函数
 
 void setup() {
   Serial.begin(9600);   //与电脑的串口连接
+  Serial.println("Hc-06 is ready!");
+  BT.begin(9600);  //设置波特率
 
   pinMode(STBY, OUTPUT);  // 引脚设置
   
@@ -29,7 +34,7 @@ void setup() {
 }
 
 void loop() {
-  //如果串口接收到数据，就可以控制电机了
+  //如果串口接收到数据，就输出到蓝牙串口
   if (Serial.available()) {
     val = Serial.read();
     Serial.println(val);
@@ -52,6 +57,7 @@ void loop() {
       }
   }
 }
+
 
 void runset(int motor, int speed, int direction){  
   
