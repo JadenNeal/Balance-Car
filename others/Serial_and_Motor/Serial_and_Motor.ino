@@ -16,6 +16,7 @@ void runset(int motor, int speed, int direction);  //转动控制函数
 
 void setup() {
   Serial.begin(9600);   //与电脑的串口连接
+  Serial.println("everything is ready!")
 
   pinMode(STBY, OUTPUT);  // 引脚设置
   
