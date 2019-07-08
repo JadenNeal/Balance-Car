@@ -17,7 +17,6 @@
 4. 成果展示
 
 ## 模块认知
-测试笔记在[这里](https://github.com/JadenNeal/Balance-Car/tree/master/TEST_NOTES)，记录了模块的测试记录，使用方法，接线图等。
 ### UNO开发板
 [参见这里](https://github.com/JadenNeal/Balance-Car/blob/master/TEST_NOTES/20190708/UNO_R3%E5%BC%80%E5%8F%91%E6%9D%BF%E7%AC%94%E8%AE%B0.md)
 ### Mpu6050模块
