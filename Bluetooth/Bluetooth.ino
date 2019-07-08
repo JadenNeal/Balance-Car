@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
 //使用软件串口，能将数字口模拟成串口
-SoftwareSerial BT(8, 9);  //新建对象，板子的接收脚为8，发送脚为9
+SoftwareSerial BT(2, 3);  //新建对象，板子的接收脚为2，发送脚为3
 char val;  //存储接收的变量
 
 void setup() {
