@@ -1,5 +1,5 @@
-#define TrigPin 2   // TriPin 的引脚接到2
-#define EchoPin 3   // EchoPin 的引脚接到3
+#define TrigPin A2   // TriPin 的引脚接到A2
+#define EchoPin A3   // EchoPin 的引脚接到A3
 
 float Value_cm;   // 距离，cm
 
@@ -7,7 +7,7 @@ void setup()
 {
 	Serial.begin(9600);
 	pinMode(TrigPin, OUTPUT);
-	pinMode(EchoPin, INPUT);
+	pinMode(EchoPin, INPUT);  // 模拟口默认是读取，所以这句可以不写。
 }
 void loop()
 {
