@@ -4,7 +4,7 @@
 #include <Adafruit_SSD1306.h>
 
 #define OLED_RESET 4
-Adafruit_SSD1306 display(OLED_RESET);
+//Adafruit_SSD1306 display(OLED_RESET);
 
 #define LOGO16_GLCD_HEIGHT 16 //定义显示高度
 #define LOGO16_GLCD_WIDTH  16 //定义显示宽度
