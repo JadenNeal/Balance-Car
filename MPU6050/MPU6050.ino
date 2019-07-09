@@ -1,9 +1,7 @@
 // I2C device class (I2Cdev) demonstration Arduino sketch for MPU6050 class
-// 10/7/2011 by Jeff Rowberg <jeff@rowberg.net>
 // Updates should (hopefully) always be available at https://github.com/jrowberg/i2cdevlib
 
 #include "Wire.h"
-
 #include "I2Cdev.h"
 #include "MPU6050.h"
 
