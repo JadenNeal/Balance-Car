@@ -16,6 +16,20 @@
 3. 小车功能开发
 4. 成果展示
 
+## 程序
+小车系统的接线在[这里](https://github.com/JadenNeal/Balance-Car/blob/master/TEST_NOTES/20190708/%E7%A6%BB%E7%BA%BF%E6%B5%8B%E8%AF%95%E7%AC%94%E8%AE%B0.md)，最后附了接线图。
+
+以下是**单个模块**的测试程序。
+- [蓝牙HC-06](https://github.com/JadenNeal/Balance-Car/blob/master/Bluetooth/Bluetooth.ino)
+- [红外对管](https://github.com/JadenNeal/Balance-Car/blob/master/Infra/Infra.ino)
+- [陀螺仪MPU6050](https://github.com/JadenNeal/Balance-Car/blob/master/MPU6050/MPU6050.ino)
+- [晶门SSD 1306 OLED显示屏](https://github.com/JadenNeal/Balance-Car/blob/master/OLED/OLED.ino)
+- [超声波SR04](https://github.com/JadenNeal/Balance-Car/blob/master/Ultrasonic/Ultrasonic.ino)
+- [全彩LED](https://github.com/JadenNeal/Balance-Car/blob/master/fullLED/fullLED.ino)
+- [电机](https://github.com/JadenNeal/Balance-Car/blob/master/motor/motor.ino)
+
+**多模块**的联调存放在[others](https://github.com/JadenNeal/Balance-Car/tree/master/others)文件夹中。
+
 ## 模块认知
 测试笔记记录在[这里](https://github.com/JadenNeal/Balance-Car/tree/master/TEST_NOTES)。
 ### UNO开发板
