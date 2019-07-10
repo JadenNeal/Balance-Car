@@ -6,7 +6,7 @@
 #include "MPU6050.h"
 
 // class default I2C address is 0x68
-// specific I2C addresses may be passed as a parameter here
+// specific I2C addresses may  be passed as a parameter here
 // AD0 low = 0x68 (default for InvenSense evaluation board)
 // AD0 high = 0x69 地址
 MPU6050 accelgyro;  //实例化mpu6050
