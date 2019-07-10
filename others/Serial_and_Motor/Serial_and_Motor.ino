@@ -16,7 +16,7 @@ void runset(int motor, int speed, int direction);  //转动控制函数
 
 void setup() {
   Serial.begin(9600);   //与电脑的串口连接
-  Serial.println("everything is ready!")
+  Serial.println("everything is ready!");
 
   pinMode(STBY, OUTPUT);  // 引脚设置
   
@@ -42,11 +42,13 @@ void loop() {
       }
     else if (val == '1') 
     {
+      runset(2, 255, 1);  // 右电机全速正转
       runset(1, 255, 1);  // 左电机全速正转
       Serial.println("val = 1: forward!");
       }
     else if (val == '2')
     {
+      runset(2, 128, 0);  // 右电机半速反转
       runset(1, 128, 0);  // 左电机半速反转
       Serial.println("val = 2: backward!");
 //      delay(2000);
