@@ -7,7 +7,7 @@
     #include "Wire.h"
 #endif
 
-#define MIN_ABS_SPEED 20
+#define MIN_ABS_SPEED 20  // 最小速度为20
 
 MPU6050 mpu;
 
@@ -25,14 +25,15 @@ VectorFloat gravity;    // [x, y, z]            gravity vector
 float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 
 //PID
-double originalSetpoint = 175.8;
+double originalSetpoint = 175.8;  // 原点
 double setpoint = originalSetpoint;
-double movingAngleOffset = 0.1;
+double movingAngleOffset = 0.1;  // 移动角偏置
 double input, output;
 int moveState=0; //0 = balance; 1 = back; 2 = forth
 double Kp = 50;
-double Kd = 1.4;
 double Ki = 60;
+double Kd = 1.4;
+
 PID pid(&input, &output, &setpoint, Kp, Ki, Kd, DIRECT);
 
 double motorSpeedFactorLeft = 0.6;
@@ -86,9 +87,10 @@ void setup()
     devStatus = mpu.dmpInitialize();
 
     // supply your own gyro offsets here, scaled for min sensitivity
-    mpu.setXGyroOffset(-2289);  // 220
-    mpu.setYGyroOffset(-212);   // 76
-    mpu.setZGyroOffset(511);  // -85
+    // -2278 -19 503 167 22  34
+    mpu.setXGyroOffset(-2278);  // 220
+    mpu.setYGyroOffset(-19);   // 76
+    mpu.setZGyroOffset(503);  // -85
     mpu.setZAccelOffset(1788); // 1688 factory default for my test chip
 
     // make sure it worked (returns 0 if so)
