@@ -1,7 +1,7 @@
 /*
  * 数字接法
  * 红外对管OUTPUT接5号引脚
- * 接收到信号infra未0，否则为1
+ * 接收到信号infra为0，否则为1
 */
 #include <Adafruit_NeoPixel.h>
 #ifdef __AVR__
@@ -10,8 +10,8 @@
  
 // 控制 WS2812 灯条的引脚编号
 #define PIN        4
-#define infraOut A3 // 输出引脚号
-int infra = 0;  // 红外对管信号
+#define infraOut A0 // 输出引脚号
+int infra = 0;      // 红外对管信号
  
 //定义控制的 LED 数量
 #define NUMPIXELS 7  // 共7个灯泡
@@ -43,7 +43,7 @@ void loop() {
   // The first NeoPixel in a strand is #0, second is 1, all the way up
   // to the count of pixels minus one.
 
-  infra = analogRead(infraOut);
+  infra = analogRead(infraOut);  // 尝试digitalRead(infraOut)
 //  Serial.println(infra);  //  调试用
   
   for(int i=0; i<NUMPIXELS; i++) { // For each pixel...
