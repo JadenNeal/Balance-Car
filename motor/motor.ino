@@ -51,15 +51,15 @@ void runset(int motor, int speed, int direction){
 }  
   
 void loop(){  
-  runset(1, 255, 1); //左电机全速向前转  
-  runset(2, 255, 1); //右电机全速向前转  
+  runset(1, 200, 1); //左电机全速向前转  
+  runset(2, 200, 1); //右电机全速向前转  
   
   delay(2000); //2秒 
   stop(); //停转
   delay(250); //两轮继续向前转  
   
-  runset(1, 128, 0); //左电机半速向后转  
-  runset(2, 128, 0); //右电机半速向后转  
+  runset(1, 100, 0); //左电机半速向后转  
+  runset(2, 100, 0); //右电机半速向后转  
   
   delay(1000);  
   stop();  
