@@ -42,14 +42,14 @@ void loop() {
       }
     else if (val == '1') 
     {
-      runset(2, 255, 1);  // 右电机全速正转
-      runset(1, 255, 1);  // 左电机全速正转
+      runset(2, 200, 0);  // 右电机全速正转
+//      runset(1, 200, 1);  // 左电机全速正转
       Serial.println("val = 1: forward!");
       }
     else if (val == '2')
     {
-      runset(2, 128, 0);  // 右电机半速反转
-      runset(1, 128, 0);  // 左电机半速反转
+      runset(2, 100, 1);  // 右电机半速反转  pass
+//      runset(1, 100, 0);    // 左电机半速反转  pass
       Serial.println("val = 2: backward!");
 //      delay(2000);
       }
@@ -71,12 +71,12 @@ void runset(int motor, int speed, int direction){
   if(motor == 1){  
     digitalWrite(AIN1, Pin1);  
     digitalWrite(AIN2, Pin2);  
-    analogWrite(PWMA, speed);  
+    digitalWrite(PWMA, speed);  
   }
-  else{  
+  else if (motor == 2){  
     digitalWrite(BIN1, Pin1);  
     digitalWrite(BIN2, Pin2);  
-    analogWrite(PWMB, speed);  
+    digitalWrite(PWMB, speed);  
   }  
 } 
 
