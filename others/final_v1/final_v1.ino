@@ -4,9 +4,9 @@
  * 角度偏移、加速度
 */
 
-#include <PinChangeInt.h>    //外部中断
-#include <MsTimer2.h>        //定时中断
-#include <KalmanFilter.h>    //卡尔曼滤波
+#include <PinChangeInt.h>    // 外部中断
+#include <MsTimer2.h>        // 定时中断
+#include <KalmanFilter.h>    // 卡尔曼滤波
 #include "I2Cdev.h"          // 陀螺仪用
 #include "MPU6050_6Axis_MotionApps20.h"  //MPU6050库文件
 #include "Wire.h"
@@ -218,7 +218,7 @@ void Set_Pwm(int moto1, int moto2)
 **************************************************************************/
 void Xianfu_Pwm(void)
 {
-  int Amplitude = 250;  // PWM满幅是255 限制在250
+  int Amplitude = 100;  // PWM满幅是255 限制在100
   if (Flag_Qian == 1)  Motor2 -= DIFFERENCE; // DIFFERENCE是一个衡量平衡小车电机和机械安装差异的一个变量。直接作用于输出，让小车具有更好的一致性。
   if (Flag_Hou == 1)   Motor2 -= DIFFERENCE - 2;
   if (Motor1 < -Amplitude) Motor1 = -Amplitude;
