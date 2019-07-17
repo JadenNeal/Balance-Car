@@ -319,8 +319,9 @@ int turn(float gyro)//转向控制
 {
   // turn_kp=2;turn_kd=0.001;
   static float Turn_Target, Turn, Turn_Convert = 1;
-  float Turn_Amplitude = 40;  //PD参数 Turn_Amplitude表示转向最大振幅
-  if (1 == Flag_Left)             Turn_Target += Turn_Convert;  //根据遥控指令改变转向偏差
+  float Turn_Amplitude = 20;  //PD参数 Turn_Amplitude表示转向最大振幅
+  if (1 == Flag_Left)           
+  Turn_Target += Turn_Convert;  //根据遥控指令改变转向偏差
   else if (1 == Flag_Right)       Turn_Target -= Turn_Convert;//根据遥控指令改变转向偏差
   else Turn_Target = 0;
   if (Turn_Target > Turn_Amplitude)  Turn_Target = Turn_Amplitude; //===转向速度限幅
