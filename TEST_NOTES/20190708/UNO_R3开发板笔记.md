@@ -2,7 +2,6 @@
 ## 硬件接口介绍
 Arduino是一款基于ATmega328P的微控制板。有14个数字输入/输出引脚（带`~`的可以输出调制模拟信号），6个模拟输入，16MHZ晶振时钟，
 
-<div align="center"><img src="https://upload-images.jianshu.io/upload_images/1437476-5c79d65d821e53cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/904/format/webp" height="60%" width="60%"></div>
 
 <div align="center"><img src="https://upload-images.jianshu.io/upload_images/12928010-3a6dce2da505b60f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/838/format/webp" height="60%" width="60%"></div>
 
