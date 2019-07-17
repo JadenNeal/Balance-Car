@@ -1,7 +1,7 @@
 /*
    实现功能：
-   1. 实现陀螺仪控制电机 √
-   2. 直立
+   1. 读取陀螺仪数据用
+   2. 陀螺仪控制电机
 */
 
 #include <PinChangeInt.h>    // 外部中断
@@ -134,7 +134,7 @@ int Turn_Off(float angle, float voltage)
 
 
 /**************************************************************************
-  函数功能：直立PD控制  
+  函数功能：直立PD控制
   入口参数：角度、角速度
   返回  值：直立控制PWM
 **************************************************************************/
@@ -240,11 +240,12 @@ void control()
   sei();  // 全局中断开启
   Mpu6050.getMotion6(&ax, &ay, &az, &gx, &gy, &gz);  //获取MPU6050陀螺仪和加速度计的数据
   KalFilter.Angletest(ax, ay, az, gx, gy, gz, dt, Q_angle, Q_gyro, R_angle, C_0, K1); // 通过卡尔曼滤波获取角度
-  Angle = KalFilter.angle;   // Angle是一个用于显示的整形变量
+  Angle = KalFilter.angle;   // Angle是一个用于显示的整形变量，这里隐藏了自动类型转换，左为int，右为float
   Balance_Pwm = balance(KalFilter.angle, KalFilter.Gyro_x);  // 直立PD控制 控制周期5ms
 
-    Serial.print("角度：");
-    Serial.println(Angle);
+  Serial.print("角度：");
+  Serial.println(KalFilter.angle); 
+  delay(100);  // 延迟0.1秒
   //  Serial.print("加速度：");
   //  Serial.println(KalFilter.Gyro_x);
   //  Serial.println();  // 换行
@@ -324,6 +325,8 @@ void setup() {
 
   MsTimer2::set(5, control);  //使用Timer2设置5ms定时中断
   MsTimer2::start();          //使用中断使能
+
+
 }
 
 /**************************************************************************
@@ -332,6 +335,6 @@ void setup() {
   返回  值：无
 **************************************************************************/
 void loop() {
-  set_STBY(HIGH);  // 初始设置STBY为HIGH
-  control();
+  set_STBY(LOW);  // 初始设置STBY为LOW
+  //  control();
 }
