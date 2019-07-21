@@ -22,7 +22,7 @@
     + TX -- 0（板子的接收端）
     + GND -- GND
     + VCC -- VCC
-3. 显示屏(HW-102)  
+3. 显示屏(SSD 1306)  
     + VCC -- 5V
     + GND -- GND
     + SCL -- SCL
@@ -74,16 +74,13 @@
     + GND -- GND
     + VCC -- VCC
 
-<div align="center"><img src="https://s2.ax1x.com/2019/07/09/ZyMTV1.png" alt="接线图" border="0" />
-
-空余的为12V电池接口</div>
-
 <div align="center"><img src="https://s2.ax1x.com/2019/07/11/ZRYGQA.jpg" alt="3维布局" />
 
-*3维布局图*</div>
+3维布局草图</div>
 
 ## 模块测试
-以下是**单个模块**的测试程序。
+### 单模块测试程序 
+**注意：单模块测试时，接线按照**[原理图](https://github.com/JadenNeal/Balance-Car/blob/master/%E5%B9%B3%E8%A1%A1%E5%B0%8F%E8%BD%A6%E5%8E%9F%E7%90%86%E5%9B%BE.pdf)
 - [蓝牙HC-06](https://github.com/JadenNeal/Balance-Car/blob/master/Bluetooth/Bluetooth.ino)
 - [红外对管](https://github.com/JadenNeal/Balance-Car/blob/master/Infra/Infra.ino)
 - [陀螺仪MPU6050](https://github.com/JadenNeal/Balance-Car/blob/master/MPU6050/MPU6050.ino)
@@ -92,7 +89,17 @@
 - [全彩LED](https://github.com/JadenNeal/Balance-Car/blob/master/fullLED/fullLED.ino)
 - [电机](https://github.com/JadenNeal/Balance-Car/blob/master/motor/motor.ino)
 
-**多模块**的联调存放在[others](https://github.com/JadenNeal/Balance-Car/tree/master/others)文件夹中。
+### 多模块联调测试程序  
+**注意：接线同上**
+- [蓝牙控制电机](https://github.com/JadenNeal/Balance-Car/blob/master/others/BT_and_Motor/BT_and_Motor.ino)
+- [串口控制电机](https://github.com/JadenNeal/Balance-Car/blob/master/others/Serial_and_Motor/Serial_and_Motor.ino)
+- [测定小车机械中值](https://github.com/JadenNeal/Balance-Car/tree/master/others/final_v2)
+- [红外线和LED](https://github.com/JadenNeal/Balance-Car/tree/master/others/infra_and_LED)
+
+### 最终实现程序  
+**注意：接线按照“整车连线”写的接线**
+- [实现小车自平衡](https://github.com/JadenNeal/Balance-Car/blob/master/others/final_v4/final_v4.ino)
+- [最终版程序](https://github.com/JadenNeal/Balance-Car/blob/master/others/final_v5/final_v5.ino)
 
 ## 模块认知
 测试笔记记录在[这里](https://github.com/JadenNeal/Balance-Car/tree/master/TEST_NOTES)。
@@ -106,8 +113,6 @@
 [野火](http://www.luwl.net/wp-content/uploads/2017/03/MPU6050%E6%95%99%E7%A8%8B.pdf)上关于MPU6050的讲解。
 
 [英文版手册下载地址](http://pdf1.alldatasheetcn.com/datasheet-pdf/view/517744/ETC1/MPU-6050.html)。
-
-[中文版手册下载地址](https://wenku.baidu.com/view/a0c0f751a31614791711cc7931b765ce04087a13.html)。
 
 ### HC-06
 蓝牙。  
@@ -136,4 +141,37 @@ OLED显示模块。
 ## 问题汇总
 在制作的过程中，遇到的问题有很多，包括硬件软件的问题，这里只列出几个比较典型的问题。
 
-待补充。
+1. **Q**：明明板子单独测模块的时候没问题，但是后来小车调试的时候有时上传程序出错，两次上传隔的时间太短的话就更容易出现这种情况，为什么呢？  
+    **A**：这是由于**在用USB上传程序时**，开发板的VCC接到了其他模块的缘故。如果不拔下来，多次往复就有很大概率导致板子烧毁。因此，在上传程序的时候，一定要把板子的VCC断开，这样就不会有问题了。  
+    如果给空板子烧程序都失败，那**很有可能是板子坏了**。
+
+2. **Q**：上传程序后，小车有反应，但是总有延迟。在转动小车的时候，轮胎总要过一段时间才会作出反应，这是为什么呢？
+    **A**：**程序的问题**。检查代码中是否有遗留下来的`delay()`，是否有`Serial.println()`、`Serial.print()`等需要串口才工作的函数。把这些全部注释掉，再查看效果。
+
+3. **Q**：loop()是空的，按理说不会有函数运行，但是给小车上传程序后，小车还是能够对陀螺仪的变化作出反应，为什么呢？
+    **A**：对于本次程序来说，这是因为**中断**或者**串口**存在的原因。  
+    来看arduino的程序结构：
+    ```c
+    #include <arduino.h> 
+
+    int main(){ 
+        init(); // 初始化库 
+        initVariant(); // 初始化变量
+
+        setup(); // 初始化 
+        for(;;){ 
+            loop(); // 主循环 
+            if SerialEvent() 
+                serialEvent(); // 串口函数 
+        } 
+    } 
+    ```
+    最后的死循环中，除了loop，还有一个串口事件判断函数——有事件则去执行，没有就只执行loop。而loop中虽然没有语句，**但setup()中还有中断的功能**
+    ```c
+    MsTimer2::set(5, control);  //使用Timer2设置5ms定时中断，控制control函数
+    MsTimer2::start();          //使用中断使能
+    ```
+    开启了中断使能后，程序就会每隔中断的时间去执行一次中断指向的函数。因此loop中没有语句也是可以的。
+
+4. 关于速度环调试的问题整理，参见[调试笔记04](https://github.com/JadenNeal/Balance-Car/blob/master/TEST_NOTES/20190717/%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B004.md)
+5. 关于转向环调试的问题整理，参见[调试笔记04](https://github.com/JadenNeal/Balance-Car/blob/master/TEST_NOTES/20190717/%E8%B0%83%E8%AF%95%E7%AC%94%E8%AE%B004.md)
